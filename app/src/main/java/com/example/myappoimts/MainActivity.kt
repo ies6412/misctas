@@ -9,9 +9,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_registro.*
 import com.example.myappoimts.PreferenceHelper.get
 import com.example.myappoimts.PreferenceHelper.set
+import com.example.myappoimts.R.string.app_press_back_again
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
-
+    private val snackbar by lazy {Snackbar.make(mainleyaut,R.string.app_press_back_again,Snackbar.LENGTH_SHORT)}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -59,6 +61,16 @@ class MainActivity : AppCompatActivity() {
         preferences["session"]=true
 
     }
+
+
+    override fun onBackPressed() {
+
+        if(snackbar.isShown)
+            super.onBackPressed()
+        else
+            snackbar.show()
+
     }
+}
 
 
