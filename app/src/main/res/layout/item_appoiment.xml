@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".MyAppoimentActivity"
+    android:orientation="vertical"
+    android:background="@drawable/bg_gradient"
+    app:cardUseCompatPadding="true"
+    android:padding="16dp"
+    android:gravity="center"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="3dp">
+
+      <LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:padding="8dp"
+          >
+
+          <TextView
+              android:id="@+id/TwAppointesId"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              tools:text="Cita Médica N7"
+              android:gravity="center_horizontal"
+              style="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
+              />
+
+          <TextView
+              android:id="@+id/TwHoraId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+              tools:text="Hora de cita"
+              android:gravity="center_horizontal"
+              style="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
+                />
+
+          <TextView
+              android:id="@+id/TwFechaId"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              tools:text="fecha"
+              android:gravity="center_horizontal"
+              style="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
+              />
+
+          <TextView
+              android:id="@+id/TwMedicoId"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+
+              tools:text="medico test"
+              android:gravity="center_horizontal"
+              style="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
+              />
+
+
+
+
+
+
+
+
+
+      </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</androidx.cardview.widget.CardView>

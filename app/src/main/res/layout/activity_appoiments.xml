@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AppoimentsActivity"
+    android:orientation="vertical"
+    android:background="@drawable/bg_gradient"
+    android:padding="16dp"
+   android:gravity="center"
+
+
+
+    >
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:text="@string/bienvenido"
+    android:gravity="center_horizontal"
+    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+    android:textColor="@color/colorBlanco"
+
+/>
+
+
+        <Button
+            android:id="@+id/Createappoiments"
+            android:layout_width="match_parent"
+
+           android:text="@string/app_reservar_cita"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            style="@style/menubutton"
+            android:drawableStart="@drawable/ic_reservas_icono"
+
+            />
+
+          <Button
+              android:id="@+id/myappoiments"
+        android:layout_width="match_parent"
+        android:text="@string/app_mis_citas"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+              style="@style/menubutton"
+              android:drawableStart="@drawable/ic_citas"
+
+
+        />
+
+
+    <Button
+        android:layout_width="match_parent"
+android:id="@+id/btn_sesionlogout"
+
+        android:text="@string/app_close_session"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        style="@style/menubutton"
+        android:drawableStart="@drawable/ic_close_sesion"
+
+
+        />
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+

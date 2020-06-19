@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">S.R.C.Médicas</string>
+    <string name="app_sesion">Inicio de Sesion</string>
+    <string name="app_email">Correo</string>
+    <string name="app_clave">Clave</string>
+    <string name="app_Registro_usuario">Registro de Usuario</string>
+    <string name="app_aceptar">Aceptar</string>
+    <string name="app_Registro">¿Aún no te has registrado?</string>
+    <string name="app_nombreUsuario">Nombre de Usuario</string>
+    <string name="Register">Confirmar</string>
+    <string name="go_to_login">¿Ya tienes una cuenta?</string>
+    <string name="app_reservar_cita">Reservar cita</string>
+    <string name="app_mis_citas">Mis citas</string>
+    <string name="app_close_session">Cerrar sesion</string>
+    <string name="bienvenido">Bienvenido</string>
+    <string name="app_registro_de_cita">Reserva de cita</string>
+    <string name="app_descripcion">Descripción</string>
+    <string name="app_especialidad">Especialidad</string>
+    <string name="app_tipocita">Tipo de cita</string>
+    <string name="app_consulta">Consulta</string>
+    <string name="app_operacion">Operacion</string>
+    <string name="app_examen">Exámen</string>
+    <string name="app_btn_next">Siguiente</string>
+    <string name="app_fecha_de_cita">Fecha  de cita</string>
+    <string name="app_medico">Médico</string>
+    <string name="app_horarios">Horario disponibles</string>
+    <string name="app_btn_confirmar">Confirmar</string>
+    <string name="app_fecha_calendario">%1$s-%2$s-%3$s</string>
+    <string name="prueba">pr</string>
+    <string name="item_appoiment_id">"Cita N# %1$d"</string>
+    <string name="item_appoiment_fecha">"Fecha de la cita %1$s"</string>
+    <string name="item_appoiment_hora">"La hora de la cita es %1$s "</string>
+    <string name="item_appoiment_medico">"Nombre del Médico es %1$s"</string>
+
+
+</resources>

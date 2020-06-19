@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MyAppoimentActivity"
+    android:orientation="vertical"
+    android:background="@drawable/bg_gradient"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/app_mis_citas"
+        android:textColor="@color/colorBlanco"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:padding="6dp"
+android:layout_marginTop="12dp"
+
+
+        />
+<androidx.recyclerview.widget.RecyclerView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rwAppoiments"
+    android:padding="2dp"
+    tools:listitem="@layout/item_appoiment"
+
+    >
+
+
+</androidx.recyclerview.widget.RecyclerView>
+
+
+</LinearLayout>
