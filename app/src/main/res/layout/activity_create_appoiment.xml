@@ -29,7 +29,7 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
         app:contentPadding="12dp"
-        android:visibility="gone"
+
 
 
         >
@@ -52,7 +52,8 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorcardview" />
+                android:textColor="@color/colorcardview"
+                android:id="@+id/descripcioncard1"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -87,7 +88,7 @@
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-
+                    android:checked="true"
                     android:text="@string/app_consulta"
                     android:textColor="@color/colorcardview"
 
@@ -130,8 +131,7 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
         android:id="@+id/steptwo"
-
-
+        android:visibility="gone"
 
 
         >

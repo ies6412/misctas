@@ -32,6 +32,11 @@
     <string name="item_appoiment_hora">"La hora de la cita es %1$s "</string>
     <string name="item_appoiment_medico">"Nombre del Médico es %1$s"</string>
     <string name="app_press_back_again">"Presione una vez màs si desea salir"</string>
+    <string name="dialog_exit_title">¿Estas seguro de salir?</string>
+    <string name="dialog_exit_message">Todos los datos ingresados se perderán</string>
+    <string name="dialog_exit_positive">Si, salir</string>
+    <string name="dialog_exit_negative">Continuar con el registro</string>
+    <string name="validate_ppoiment_descripcion">La descripción es demasiado corta</string>
 
 
 </resources>

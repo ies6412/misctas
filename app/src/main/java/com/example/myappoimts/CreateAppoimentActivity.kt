@@ -1,6 +1,7 @@
 package com.example.myappoimts
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.opengl.Visibility
 import android.os.Build
@@ -18,14 +19,20 @@ class CreateAppoimentActivity : AppCompatActivity() {
     private val selectedcalendar= Calendar.getInstance()
     private var selectedradiobutton: RadioButton?=null
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_appoiment)
         btn_siguiente.setOnClickListener {
+            if(descripcioncard1.text.toString().length<3)
+                descripcioncard1.error= getString(R.string.validate_ppoiment_descripcion)
+            else{
             stepone.visibility=View.GONE
             steptwo.visibility= View.VISIBLE
             btn_siguiente.visibility=View.GONE
             btn_confirmar.visibility= View.VISIBLE
+                }
         }
         btn_confirmar.setOnClickListener {
             Toast.makeText(this,"cita registrada",Toast.LENGTH_SHORT).show()
@@ -116,5 +123,30 @@ class CreateAppoimentActivity : AppCompatActivity() {
     fun Int.twoDigit()
         = if(this>9) this.toString() else "0$this"
 
+    override fun onBackPressed() {
 
+        if(steptwo.visibility==View.VISIBLE){
+
+            steptwo.visibility=View.GONE
+            stepone.visibility=View.VISIBLE
+            btn_confirmar.visibility=View.GONE
+            btn_siguiente.visibility=View.VISIBLE
+        }
+        else if(stepone.visibility==View.VISIBLE){
+
+            val builder=AlertDialog.Builder(this)
+            builder.setTitle(getString(R.string.dialog_exit_title))
+            builder.setMessage(getString(R.string.dialog_exit_message))
+            builder.setPositiveButton(getString(R.string.dialog_exit_positive)) { _, _->
+                finish()
+            }
+            builder.setNegativeButton(getString(R.string.dialog_exit_negative)){ dialog, _->dialog.dismiss()}
+            val dialog=builder.create()
+            dialog.show()
+
+        }
+
+
+
+    }
 }
