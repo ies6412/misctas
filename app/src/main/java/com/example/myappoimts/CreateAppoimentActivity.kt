@@ -11,6 +11,8 @@ import android.widget.RadioButton
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_create_appoiment.*
 import kotlinx.android.synthetic.main.card_view1.*
 import kotlinx.android.synthetic.main.card_view_step2.*
 import kotlinx.android.synthetic.main.card_view_step3.*
@@ -18,7 +20,7 @@ import java.util.*
 
 class CreateAppoimentActivity : AppCompatActivity() {
     private val selectedcalendar= Calendar.getInstance()
-    private var selectedradiobutton: RadioButton?=null
+    private var selectedTimeRadioButton: RadioButton?=null
 
 
 
@@ -38,13 +40,19 @@ class CreateAppoimentActivity : AppCompatActivity() {
         }
         btn_siguiente2.setOnClickListener {
 
-            if(fechacita.text.toString().length==0)
-                fechacita.error=getString(R.string.validate_ppoiment_descripcion)
-            else {
-                stepone.visibility = View.GONE
-                steptwo.visibility = View.GONE
-                datosdecita()
-                steptree.visibility = View.VISIBLE
+            when {
+                fechacita.text.toString().isEmpty() -> {
+                    fechacita.error=getString(R.string.validate_ppoiment_date)}
+                selectedTimeRadioButton==null -> {
+                    Snackbar.make(createAppoimentsLinearLeyaout,R.string.validate_ppoiment_time,Snackbar.LENGTH_SHORT).show()
+
+                }
+                else -> {
+                    stepone.visibility = View.GONE
+                    steptwo.visibility = View.GONE
+                    datosdecita()
+                    steptree.visibility = View.VISIBLE
+                }
             }
          }
 
@@ -81,12 +89,13 @@ class CreateAppoimentActivity : AppCompatActivity() {
              d.twoDigit()
          )
          )
-         displayradiobutons()
+         fechacita.error=null
+         displayRadiosButtons()
      }
 
        val datePickerDialog=DatePickerDialog(this,listener,year,month,dayOfMonth)
-     val datepicker =datePickerDialog.datePicker
-     val calendar=Calendar.getInstance()
+       val datepicker =datePickerDialog.datePicker
+       val calendar=Calendar.getInstance()
      //limite inferior
      calendar.add(Calendar.DAY_OF_MONTH,1)
      datepicker.minDate=calendar.timeInMillis
@@ -100,11 +109,11 @@ class CreateAppoimentActivity : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    private fun displayradiobutons(){
+    private fun displayRadiosButtons(){
         radiogroupleft.removeAllViews()
         radiogrouprigth.removeAllViews()
 
-        selectedradiobutton=null
+        selectedTimeRadioButton=null
 
 
         var goToLeft=true
@@ -118,9 +127,9 @@ class CreateAppoimentActivity : AppCompatActivity() {
             radiobutton.id = View.generateViewId()
             radiobutton.text = it
              radiobutton.setOnClickListener { view->
-                 selectedradiobutton?.isChecked=false
-                 selectedradiobutton= view as RadioButton?
-                 selectedradiobutton?.isChecked=true
+                 selectedTimeRadioButton?.isChecked=false
+                 selectedTimeRadioButton= view as RadioButton?
+                 selectedTimeRadioButton?.isChecked=true
 
 
              }
@@ -188,7 +197,7 @@ class CreateAppoimentActivity : AppCompatActivity() {
 
 
         tipocitaview.text=selectradiotype.text.toString()
-        horaview.text=selectedradiobutton?.text.toString()
+        horaview.text=selectedTimeRadioButton?.text.toString()
 
 
 
