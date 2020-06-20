@@ -4,6 +4,6 @@
     <color name="colorPrimaryDark">#172b4d</color>
     <color name="colorAccent">#5e72e4</color>
     <color name="colorBlanco">#ffff</color>
-    <color name="colorNEGRO">#141414</color>
+    <color name="colorNEGRO">#000000</color>
     <color name="colorcardview">#141414</color>
 </resources>

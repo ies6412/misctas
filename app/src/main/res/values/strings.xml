@@ -16,7 +16,7 @@
     <string name="app_registro_de_cita">Reserva de cita</string>
     <string name="app_descripcion">Descripción</string>
     <string name="app_especialidad">Especialidad</string>
-    <string name="app_tipocita">Tipo de cita</string>
+    <string name="app_tipocita">Tipo de atención</string>
     <string name="app_consulta">Consulta</string>
     <string name="app_operacion">Operacion</string>
     <string name="app_examen">Exámen</string>
@@ -37,6 +37,8 @@
     <string name="dialog_exit_positive">Si, salir</string>
     <string name="dialog_exit_negative">Continuar con el registro</string>
     <string name="validate_ppoiment_descripcion">La descripción es demasiado corta</string>
+    <string name="app_hora_de_cita">Hora de cita</string>
+    <string name="datos_de_cita">Datos de cita</string>
 
 
 </resources>

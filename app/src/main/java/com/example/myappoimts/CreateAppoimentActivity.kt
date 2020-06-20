@@ -3,16 +3,17 @@ package com.example.myappoimts
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.DatePickerDialog
-import android.opengl.Visibility
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import kotlinx.android.synthetic.main.activity_create_appoiment.*
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.card_view1.*
+import kotlinx.android.synthetic.main.card_view_step2.*
+import kotlinx.android.synthetic.main.card_view_step3.*
 import java.util.*
 
 class CreateAppoimentActivity : AppCompatActivity() {
@@ -30,14 +31,30 @@ class CreateAppoimentActivity : AppCompatActivity() {
             else{
             stepone.visibility=View.GONE
             steptwo.visibility= View.VISIBLE
-            btn_siguiente.visibility=View.GONE
-            btn_confirmar.visibility= View.VISIBLE
+            steptree.visibility=View.GONE
+
+
                 }
         }
+        btn_siguiente2.setOnClickListener {
+
+            if(fechacita.text.toString().length==0)
+                fechacita.error=getString(R.string.validate_ppoiment_descripcion)
+            else {
+                stepone.visibility = View.GONE
+                steptwo.visibility = View.GONE
+                datosdecita()
+                steptree.visibility = View.VISIBLE
+            }
+         }
+
         btn_confirmar.setOnClickListener {
             Toast.makeText(this,"cita registrada",Toast.LENGTH_SHORT).show()
             finish()
         }
+
+
+        //opciones de los select
         val options= arrayOf("Odontologia","Pediatia","Cirujia")
         especialidad.adapter=ArrayAdapter(this,android.R.layout.simple_list_item_1,options)
 
@@ -125,26 +142,54 @@ class CreateAppoimentActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
 
-        if(steptwo.visibility==View.VISIBLE){
+        when {
+            steptree.visibility==View.VISIBLE -> {
+                steptwo.visibility=View.VISIBLE
+                stepone.visibility=View.GONE
+                steptree.visibility=View.GONE
 
-            steptwo.visibility=View.GONE
-            stepone.visibility=View.VISIBLE
-            btn_confirmar.visibility=View.GONE
-            btn_siguiente.visibility=View.VISIBLE
-        }
-        else if(stepone.visibility==View.VISIBLE){
-
-            val builder=AlertDialog.Builder(this)
-            builder.setTitle(getString(R.string.dialog_exit_title))
-            builder.setMessage(getString(R.string.dialog_exit_message))
-            builder.setPositiveButton(getString(R.string.dialog_exit_positive)) { _, _->
-                finish()
             }
-            builder.setNegativeButton(getString(R.string.dialog_exit_negative)){ dialog, _->dialog.dismiss()}
-            val dialog=builder.create()
-            dialog.show()
+            steptwo.visibility==View.VISIBLE -> {
 
+                steptwo.visibility=View.GONE
+                steptree.visibility=View.GONE
+                stepone.visibility=View.VISIBLE
+            }
+            stepone.visibility==View.VISIBLE -> {
+
+                val builder=AlertDialog.Builder(this)
+                builder.setTitle(getString(R.string.dialog_exit_title))
+                builder.setMessage(getString(R.string.dialog_exit_message))
+                builder.setPositiveButton(getString(R.string.dialog_exit_positive)) { _, _->
+                    finish()
+                }
+                builder.setNegativeButton(getString(R.string.dialog_exit_negative)){ dialog, _->dialog.dismiss()}
+                val dialog=builder.create()
+                dialog.show()
+
+            }
         }
+
+
+
+    }
+
+
+    private fun datosdecita(){
+       descripcionview.text=descripcioncard1.text.toString()
+        medicoview.text=doctors.selectedItem.toString()
+
+        especialidadviewc.text=especialidad.selectedItem.toString()
+        fechacitaview.text=fechacita.text.toString()
+
+            val selectradiobutton=RadiogroupConsulta.checkedRadioButtonId
+           val selectradiotype=RadiogroupConsulta.findViewById<RadioButton>(selectradiobutton)
+
+
+
+        tipocitaview.text=selectradiotype.text.toString()
+        horaview.text=selectedradiobutton?.text.toString()
+
 
 
 
