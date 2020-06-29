@@ -1,11 +1,11 @@
-package com.example.myappoimts
+package com.example.myappoimts.ui
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myappoimts.R
 import com.example.myappoimts.model.Appoment
 import kotlinx.android.synthetic.main.item_appoiment.view.*
 
@@ -30,7 +30,11 @@ class AppoimentAdapter( private val appoiment: ArrayList<Appoment>)
      //crear la visra aprotr e xml de item
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
        return ViewHolder(
-           LayoutInflater.from(parent.context).inflate(R.layout.item_appoiment,parent,false)
+           LayoutInflater.from(parent.context).inflate(
+               R.layout.item_appoiment,
+               parent,
+               false
+           )
        )
 
 

@@ -1,8 +1,9 @@
-package com.example.myappoimts
+package com.example.myappoimts.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myappoimts.R
 import com.example.myappoimts.model.Appoment
 import kotlinx.android.synthetic.main.activity_my_appoiment.*
 
@@ -20,6 +21,7 @@ class MyAppoimentActivity : AppCompatActivity() {
 
 
         rwAppoiments.layoutManager=LinearLayoutManager(this)
-        rwAppoiments.adapter=AppoimentAdapter(appoiments)
+        rwAppoiments.adapter=
+            AppoimentAdapter(appoiments)
     }
 }

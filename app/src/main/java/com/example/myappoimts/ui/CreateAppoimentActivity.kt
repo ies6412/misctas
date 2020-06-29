@@ -1,9 +1,10 @@
-package com.example.myappoimts
+package com.example.myappoimts.ui
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.os.Build
+import retrofit2.Callback
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
@@ -11,16 +12,26 @@ import android.widget.RadioButton
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myappoimts.R
+import com.example.myappoimts.io.ApiService
+import com.example.myappoimts.model.EspecialidadMedica
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_create_appoiment.*
 import kotlinx.android.synthetic.main.card_view1.*
 import kotlinx.android.synthetic.main.card_view_step2.*
 import kotlinx.android.synthetic.main.card_view_step3.*
+import retrofit2.Call
+import retrofit2.Response
 import java.util.*
+import kotlin.collections.ArrayList
 
 class CreateAppoimentActivity : AppCompatActivity() {
     private val selectedcalendar= Calendar.getInstance()
     private var selectedTimeRadioButton: RadioButton?=null
+    private val apiService:ApiService by lazy {
+        ApiService.create()
+    }
+
 
 
 
@@ -44,7 +55,8 @@ class CreateAppoimentActivity : AppCompatActivity() {
                 fechacita.text.toString().isEmpty() -> {
                     fechacita.error=getString(R.string.validate_ppoiment_date)}
                 selectedTimeRadioButton==null -> {
-                    Snackbar.make(createAppoimentsLinearLeyaout,R.string.validate_ppoiment_time,Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(createAppoimentsLinearLeyaout,
+                        R.string.validate_ppoiment_time,Snackbar.LENGTH_SHORT).show()
 
                 }
                 else -> {
@@ -63,8 +75,9 @@ class CreateAppoimentActivity : AppCompatActivity() {
 
 
         //opciones de los select
-        val options= arrayOf("Odontologia","Pediatia","Cirujia")
-        especialidad.adapter=ArrayAdapter(this,android.R.layout.simple_list_item_1,options)
+
+
+        cargarespecialidades()
 
         val optiondoctor= arrayOf("medico A","medicoa B","Medico c")
         doctors.adapter=ArrayAdapter(this,android.R.layout.simple_list_item_1,optiondoctor)
@@ -200,6 +213,40 @@ class CreateAppoimentActivity : AppCompatActivity() {
         horaview.text=selectedTimeRadioButton?.text.toString()
 
 
+
+
+    }
+
+    private fun cargarespecialidades(){
+
+     val call: Call<ArrayList<EspecialidadMedica>> =apiService.getespecialidad()
+
+        //Toast.makeText(this, apiService.getespecialidad().toString(),Toast.LENGTH_LONG).show()
+       call.enqueue(object:Callback<ArrayList<EspecialidadMedica>>{
+            override fun onFailure(call: Call<ArrayList<EspecialidadMedica>>, t: Throwable) {
+              Toast.makeText(this@CreateAppoimentActivity,"Ocurrio un problema al cargar los datos"+t.toString(),Toast.LENGTH_LONG).show()
+                finish()
+            }
+
+            override fun onResponse(call: Call<ArrayList<EspecialidadMedica>>, response: Response<ArrayList<EspecialidadMedica>>)
+            {
+              if(response.isSuccessful)
+               {
+                   val especialid=response.body()
+                   val especialidadoption=ArrayList<String>()
+                   especialid?.forEach {
+                       especialidadoption.add(it.nombre)
+                   }
+
+                   especialidad.adapter=ArrayAdapter(this@CreateAppoimentActivity,android.R.layout.simple_list_item_1,especialidadoption)
+
+
+               }
+
+            }
+        })
+
+        // val options= arrayOf("Odontologia","Pediatia","Cirujia")
 
 
     }
