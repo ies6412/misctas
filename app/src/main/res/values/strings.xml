@@ -41,6 +41,7 @@
     <string name="datos_de_cita">Datos de cita</string>
     <string name="validate_ppoiment_date">Ingrese una fecha</string>
     <string name="validate_ppoiment_time">Elija una hora</string>
+    <string name="Error_al_cargar_datos_medicos">Se presentaron problemas al cargar los datos de los médicos</string>
 
 
 </resources>

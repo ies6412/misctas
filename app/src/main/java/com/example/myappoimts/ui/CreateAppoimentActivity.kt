@@ -7,13 +7,12 @@ import android.os.Build
 import retrofit2.Callback
 import android.os.Bundle
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.RadioButton
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myappoimts.R
 import com.example.myappoimts.io.ApiService
+import com.example.myappoimts.model.Doctor
 import com.example.myappoimts.model.EspecialidadMedica
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_create_appoiment.*
@@ -78,9 +77,10 @@ class CreateAppoimentActivity : AppCompatActivity() {
 
 
         cargarespecialidades()
+        EscojerEspecialidad()
 
-        val optiondoctor= arrayOf("medico A","medicoa B","Medico c")
-        doctors.adapter=ArrayAdapter(this,android.R.layout.simple_list_item_1,optiondoctor)
+        //val optiondoctor= arrayOf("medico A","medicoa B","Medico c")
+        //doctors.adapter=ArrayAdapter(this,android.R.layout.simple_list_item_1,optiondoctor)
     }
 
 
@@ -232,17 +232,10 @@ class CreateAppoimentActivity : AppCompatActivity() {
             {
               if(response.isSuccessful)
                {
-                   val especialid=response.body()
-                   val especialidadoption=ArrayList<String>()
-                   especialid?.forEach {
-                       especialidadoption.add(it.nombre)
-                   }
+                   val especialidadesfor=response.body()
 
-                   especialidad.adapter=ArrayAdapter(this@CreateAppoimentActivity,android.R.layout.simple_list_item_1,especialidadoption)
-
-
+                   especialidad.adapter=ArrayAdapter<EspecialidadMedica>(this@CreateAppoimentActivity,android.R.layout.simple_list_item_1,especialidadesfor!!)
                }
-
             }
         })
 
@@ -250,4 +243,46 @@ class CreateAppoimentActivity : AppCompatActivity() {
 
 
     }
+    //funcion paraescuchar cambos en el select de especialdiad
+    private fun EscojerEspecialidad(){
+
+        especialidad.onItemSelectedListener=object:AdapterView.OnItemSelectedListener{
+           override fun onNothingSelected(parent: AdapterView<*>?) {
+               TODO("Not yet implemented")
+           }
+
+           override fun onItemSelected(adapter: AdapterView<*>?,view: View?,position: Int, id: Long
+           ) {
+
+              val especialidadoption: EspecialidadMedica =  adapter?.getItemAtPosition(position)  as EspecialidadMedica
+              // Toast.makeText(this@CreateAppoimentActivity,especialidadoption.nombre,Toast.LENGTH_SHORT).show()
+               cargardoctores(especialidadoption.id)
+
+           }
+       }
+
+    }
+    private fun cargardoctores(especialidadid: Int){
+
+       val call= apiService.getDoctor(especialidadid)
+        call.enqueue(object:Callback<ArrayList<Doctor>>{
+            override fun onFailure(call: Call<ArrayList<Doctor>>, t: Throwable) {
+                Toast.makeText(this@CreateAppoimentActivity,getString(R.string.Error_al_cargar_datos_medicos),Toast.LENGTH_LONG).show()
+                finish()
+            }
+
+            override fun onResponse(call: Call<ArrayList<Doctor>>,response: Response<ArrayList<Doctor>>) {
+
+                if(response.isSuccessful)
+                {
+                    //Toast.makeText(this@CreateAppoimentActivity,response.toString(),Toast.LENGTH_LONG).show()
+                    val medicosfor=response.body()
+                   doctors.adapter=ArrayAdapter<Doctor>(this@CreateAppoimentActivity,android.R.layout.simple_list_item_1,medicosfor!!)
+                }
+            }
+        })
+
+    }
+
+
 }
