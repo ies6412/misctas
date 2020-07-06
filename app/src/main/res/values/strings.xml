@@ -42,6 +42,15 @@
     <string name="validate_ppoiment_date">Ingrese una fecha</string>
     <string name="validate_ppoiment_time">Elija una hora</string>
     <string name="Error_al_cargar_datos_medicos">Se presentaron problemas al cargar los datos de los médicos</string>
+    <string name="Error_cargar_horas">NO se ha podido cargar loas  horas porque</string>
+    <string name="No_hay_horas_disponibles">No existen horas disponibles</string>
+    <string name="Disponibilidad_horas">Seleccione fecha  para escojer horario</string>
+    <string name="No_disponbilidad_horario">No existe disponibilidad en esta fecha</string>
+    <string name="Problema_de_login">Ocuurió un problema</string>
+    <string name="Error_ingresar">Se obtuvo una respuesta mala</string>
+    <string name="api_Complete_los_datos">Por favor complete los datos</string>
+    <string name="Usuario_Contrasena_incorrecto">Usuario o Contraseña Incorrecto</string>
+    <string name="Email_password_empty">Por favor ingrese correo y clave!!</string>
 
 
 </resources>

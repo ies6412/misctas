@@ -47,6 +47,7 @@
             android:layout_marginTop="8dp"
             android:inputType="textEmailAddress"
             android:textColor="@color/colorBlanco"
+            android:id="@+id/etemail"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -62,6 +63,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:inputType="textPassword"
+            android:id="@+id/etpassword"
+            android:textColor="@color/colorBlanco"
             />
 
              <Button

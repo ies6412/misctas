@@ -1,4 +1,3 @@
 package com.example.myappoimts.model
 
-class Shedule {
-}
+data class Shedule(val manana:ArrayList<Hourinterval>,val tarde :ArrayList<Hourinterval>)

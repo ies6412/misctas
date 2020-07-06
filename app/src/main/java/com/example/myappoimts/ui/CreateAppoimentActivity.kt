@@ -6,6 +6,8 @@ import android.app.DatePickerDialog
 import android.os.Build
 import retrofit2.Callback
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.*
 import androidx.annotation.RequiresApi
@@ -14,6 +16,8 @@ import com.example.myappoimts.R
 import com.example.myappoimts.io.ApiService
 import com.example.myappoimts.model.Doctor
 import com.example.myappoimts.model.EspecialidadMedica
+import com.example.myappoimts.model.Hourinterval
+import com.example.myappoimts.model.Shedule
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_create_appoiment.*
 import kotlinx.android.synthetic.main.card_view1.*
@@ -78,6 +82,7 @@ class CreateAppoimentActivity : AppCompatActivity() {
 
         cargarespecialidades()
         EscojerEspecialidad()
+        escucharcambiosdedoctoryfecha()
 
         //val optiondoctor= arrayOf("medico A","medicoa B","Medico c")
         //doctors.adapter=ArrayAdapter(this,android.R.layout.simple_list_item_1,optiondoctor)
@@ -98,12 +103,12 @@ class CreateAppoimentActivity : AppCompatActivity() {
          selectedcalendar.set(y,m,d)
          fechacita.setText(resources.getString(
              R.string.app_fecha_calendario,y,
-             m.twoDigit(),
+             (m+1).twoDigit(),
              d.twoDigit()
          )
          )
          fechacita.error=null
-         displayRadiosButtons()
+
      }
 
        val datePickerDialog=DatePickerDialog(this,listener,year,month,dayOfMonth)
@@ -122,17 +127,22 @@ class CreateAppoimentActivity : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    private fun displayRadiosButtons(){
+    private fun displayRadiosButtons(hours:ArrayList<String>){
         radiogroupleft.removeAllViews()
         radiogrouprigth.removeAllViews()
 
         selectedTimeRadioButton=null
-
-
+          if(hours.isEmpty()){
+              nodisponibilidadhora.visibility=View.VISIBLE
+              disponibilidad_hora.visibility=View.GONE
+             // Toast.makeText(this@CreateAppoimentActivity,getString(R.string.No_hay_horas_disponibles),Toast.LENGTH_SHORT).show()
+              return
+          }
+        nodisponibilidadhora.visibility=View.GONE
         var goToLeft=true
        // radiogroup.clearCheck()
         //radiogroup.removeAllViews()
-        val hours= arrayOf("3:00 PM","3:30 PM","4:00 PM","4:30 PM")
+        //val hours= arrayOf("3:00 PM","3:30 PM","4:00 PM","4:30 PM")
         hours.forEach {
 
             val radiobutton = RadioButton(this)
@@ -248,7 +258,7 @@ class CreateAppoimentActivity : AppCompatActivity() {
 
         especialidad.onItemSelectedListener=object:AdapterView.OnItemSelectedListener{
            override fun onNothingSelected(parent: AdapterView<*>?) {
-               TODO("Not yet implemented")
+
            }
 
            override fun onItemSelected(adapter: AdapterView<*>?,view: View?,position: Int, id: Long
@@ -265,6 +275,7 @@ class CreateAppoimentActivity : AppCompatActivity() {
     private fun cargardoctores(especialidadid: Int){
 
        val call= apiService.getDoctor(especialidadid)
+
         call.enqueue(object:Callback<ArrayList<Doctor>>{
             override fun onFailure(call: Call<ArrayList<Doctor>>, t: Throwable) {
                 Toast.makeText(this@CreateAppoimentActivity,getString(R.string.Error_al_cargar_datos_medicos),Toast.LENGTH_LONG).show()
@@ -283,6 +294,75 @@ class CreateAppoimentActivity : AppCompatActivity() {
         })
 
     }
+    private fun  escucharcambiosdedoctoryfecha(){
+        doctors.onItemSelectedListener=object:AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
 
+            }
+
+            override fun onItemSelected(adapter: AdapterView<*>?,view: View?,position: Int, id: Long
+            ) {
+
+                val doctoroption: Doctor =  adapter?.getItemAtPosition(position)  as Doctor
+                // Toast.makeText(this@CreateAppoimentActivity,doctoroption.name,Toast.LENGTH_SHORT).show()
+                cargarhoras(doctoroption.id,fechacita.text.toString())
+
+            }
+        }
+  fechacita.addTextChangedListener(object:TextWatcher{
+            override fun afterTextChanged(s: Editable?) {    }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                    val doctoroption =doctors.selectedItem as Doctor
+                    cargarhoras(doctoroption.id,fechacita.text.toString())
+
+
+            }
+        })
+
+    }
+    private fun cargarhoras(doctorid:Int,fechacitas: String){
+          if(fechacitas.isEmpty())
+          {
+              disponibilidad_hora.visibility=View.VISIBLE
+              return
+          }
+
+        val call=apiService.gethoras(fechacitas,doctorid)
+        call.enqueue(object:Callback<Shedule>{
+            override fun onFailure(call: Call<Shedule>, t: Throwable) {
+                disponibilidad_hora.visibility=View.VISIBLE
+               // Toast.makeText(this@CreateAppoimentActivity,getString(R.string.Error_cargar_horas)+t.toString(),Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<Shedule>, response: Response<Shedule>) {
+
+                if(response.isSuccessful) {
+                    val shudele = response.body()
+                    //Toast.makeText(this@CreateAppoimentActivity,"${shudele?.manana?.size}${shudele?.tarde?.size}",Toast.LENGTH_SHORT)
+                   shudele?.let {
+                       val intervals=it.manana   +    it.tarde
+                       val hours=ArrayList<String>()
+                        intervals.forEach {interval->
+                        hours.add(interval.inicio)
+                        }
+                       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                           displayRadiosButtons(hours)
+                       }
+                   }
+
+
+                }
+            }
+        })
+     // Toast.makeText(this@CreateAppoimentActivity,doctorid.toString()+"fecha cita "+fechacitas,Toast.LENGTH_SHORT).show()
+    }
 
 }
+
+

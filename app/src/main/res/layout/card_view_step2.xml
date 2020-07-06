@@ -3,23 +3,21 @@
 
 
 
-
     <androidx.cardview.widget.CardView
         android:id="@+id/steptwo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-
-
+        xmlns:android="http://schemas.android.com/apk/res/android"
+         xmlns:app="http://schemas.android.com/apk/res-auto"
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
         app:contentPadding="12dp"
-        android:visibility="gone"
+    android:visibility="gone"
 
-
-
-
+        >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         >
 
         <LinearLayout
@@ -70,11 +68,28 @@
                 android:text="@string/app_horarios"
                 android:textColor="@color/colorcardview" />
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Disponibilidad_horas"
+                    android:textColor="@color/colorAccent"
+                    android:id="@+id/disponibilidad_hora"
+
+                    />
+
+            <TextView
+                android:id="@+id/nodisponibilidadhora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/No_disponbilidad_horario"
+                android:textColor="@color/colorPrimary"
+                android:visibility="gone"
+                />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
                 <LinearLayout
                     android:id="@+id/radiogroupleft"
                     android:layout_width="0dp"
@@ -113,8 +128,9 @@
                 android:text="@string/app_btn_next" />
         </LinearLayout>
 
-
+    </ScrollView>
     </androidx.cardview.widget.CardView>
+
 
 
 

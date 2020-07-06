@@ -1,4 +1,6 @@
 package com.example.myappoimts.io.response
 
-class Loginreponse {
-}
+import com.example.myappoimts.model.User
+
+data class Loginreponse (val success:Boolean, val User: User, val jwt:String)
+

@@ -1,4 +1,4 @@
-package com.example.myappoimts
+package com.example.myappoimts.Util
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager

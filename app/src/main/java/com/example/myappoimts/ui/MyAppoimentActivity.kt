@@ -18,6 +18,11 @@ class MyAppoimentActivity : AppCompatActivity() {
         appoiments.add(Appoment(2,  "prueba2","12/13/12" ,"04:00" ))
         appoiments.add(Appoment(3,  "prueba3","12/14/12" ,"05:00" ))
         appoiments.add(Appoment(4,  "prueba4","12/15/12" ,"06:00" ))
+        appoiments.add(Appoment(4,  "prueba4","12/15/12" ,"06:00" ))
+        appoiments.add(Appoment(4,  "prueba4","12/15/12" ,"06:00" ))
+        appoiments.add(Appoment(4,  "prueba4","12/15/12" ,"06:00" ))
+        appoiments.add(Appoment(4,  "prueba4","12/15/12" ,"06:00" ))
+        appoiments.add(Appoment(4,  "prueba4","12/15/12" ,"06:00" ))
 
 
         rwAppoiments.layoutManager=LinearLayoutManager(this)
