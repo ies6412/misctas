@@ -1,6 +1,7 @@
 package com.example.myappoimts.io
 
 import com.example.myappoimts.io.response.Loginreponse
+import com.example.myappoimts.model.Appoment
 import com.example.myappoimts.model.Doctor
 import com.example.myappoimts.model.EspecialidadMedica
 import com.example.myappoimts.model.Shedule
@@ -35,7 +36,8 @@ interface ApiService {
     @POST("api/logout")
     fun postlogout(@Header("Authorization")autoHeader:String):Call<Void>
 
-
+    @GET("api/appoiments")
+    fun getcitas(@Header("Authorization")autoHeader:String):Call<ArrayList<Appoment>>
 
 
 

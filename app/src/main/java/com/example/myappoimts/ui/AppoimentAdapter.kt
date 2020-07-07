@@ -10,15 +10,17 @@ import com.example.myappoimts.model.Appoment
 import kotlinx.android.synthetic.main.item_appoiment.view.*
 
 
-class AppoimentAdapter( private val appoiment: ArrayList<Appoment>)
+class AppoimentAdapter
     :RecyclerView.Adapter<AppoimentAdapter.ViewHolder>() {
+
+    var appoiment=ArrayList<Appoment>()
     class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
        @SuppressLint("SetTextI18n")
        fun bind(appoment:Appoment) = with(itemView){
                TwAppointesId.text= context.getString(R.string.item_appoiment_id,appoment.id)
-               TwHoraId.text=context.getString(R.string.item_appoiment_hora,appoment.hora)
+               TwHoraId.text=context.getString(R.string.item_appoiment_hora,appoment.Horacita)
                TwFechaId.text=context.getString(R.string.item_appoiment_fecha,appoment.fecha)
-               TwMedicoId.text=context.getString(R.string.item_appoiment_medico,appoment.doctorname)
+               TwMedicoId.text=context.getString(R.string.item_appoiment_medico,appoment.doctor.name)
 
 
            }
