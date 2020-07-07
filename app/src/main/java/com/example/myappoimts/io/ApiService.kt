@@ -32,7 +32,6 @@ interface ApiService {
     fun postlogin(@Query("email") email:String, @Query("password") password: String):Call<Loginreponse>
 
 
-
     @POST("api/logout")
     fun postlogout(@Header("Authorization")autoHeader:String):Call<Void>
 

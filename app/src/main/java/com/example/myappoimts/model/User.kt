@@ -6,4 +6,4 @@ package com.example.myappoimts.model
             "email": "paciente_externo@d.com"
  */
 
-data class User (val id:Int,val name:String, val email:String,val rolesp:String)
+data class User (val id:Int,val name:String, val rolesp:String,val email:String)

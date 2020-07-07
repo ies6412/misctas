@@ -48,6 +48,7 @@
             android:inputType="textEmailAddress"
             android:textColor="@color/colorBlanco"
             android:id="@+id/etemail"
+            android:text="paciente_externo@d.com"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -65,6 +66,7 @@
             android:inputType="textPassword"
             android:id="@+id/etpassword"
             android:textColor="@color/colorBlanco"
+            android:text="123456789"
             />
 
              <Button

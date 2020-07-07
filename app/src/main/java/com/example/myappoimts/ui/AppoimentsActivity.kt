@@ -40,10 +40,10 @@ class AppoimentsActivity : AppCompatActivity() {
             startActivity(myappoimnets)
         }
          btn_sesionlogout.setOnClickListener {
-             perfomlogaut()
+            perfomlogaut()
 
 
-             clearSessionPreference()
+               clearSessionPreference()
 
 
          }
@@ -60,7 +60,7 @@ class AppoimentsActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
 
-                       clearSessionPreference()
+                     //  clearSessionPreference()
                       val main_activity=Intent(this@AppoimentsActivity, MainActivity::class.java)
                       startActivity(main_activity)
                        finish()
@@ -69,7 +69,7 @@ class AppoimentsActivity : AppCompatActivity() {
 
 
     }
-    private fun clearSessionPreference(){
+   private fun clearSessionPreference(){
         /*val preference=getSharedPreferences("general", Context.MODE_PRIVATE)
         val editor=preference.edit()
         editor.putBoolean("session",false)
