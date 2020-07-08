@@ -25,7 +25,25 @@ android:layout_height="wrap_content"
               android:id="@+id/TwAppointesId"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              tools:text="Cita Médica N7"
+              tools:text="Cita Médica No"
+              android:gravity="center_horizontal"
+              style="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
+              />
+
+          <TextView
+              android:id="@+id/TwMedicoId"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              tools:text="medico test"
+              android:gravity="center_horizontal"
+              style="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
+              />
+
+          <TextView
+              android:id="@+id/TwespecialdiadId"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              tools:text="Especialidad"
               android:gravity="center_horizontal"
               style="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
               />
@@ -43,20 +61,78 @@ android:layout_height="wrap_content"
               android:id="@+id/TwFechaId"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              tools:text="fecha"
+              tools:text="Fecha de cita"
               android:gravity="center_horizontal"
               style="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
               />
 
-          <TextView
-              android:id="@+id/TwMedicoId"
+          <FrameLayout
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:gravity="center">
 
-              tools:text="medico test"
+          <TextView
+              android:id="@+id/TwEstado"
+              style="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
+              android:layout_width="wrap_content"
+              android:layout_weight="1"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              tools:text="Confirmado..." />
+              <ImageButton
+                  android:layout_gravity="end"
+                  android:id="@+id/imgbutton"
+                  android:layout_width="wrap_content"
+                  android:layout_height="match_parent"
+                  android:src="@drawable/ic_expand_more_black_24dp"
+                  android:background="@color/colorBlanco"
+                  tools:src="@drawable/ic_expand_less_black_24dp"
+                  />
+
+
+          </FrameLayout>
+               <LinearLayout
+                   android:id="@+id/lineardatos"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="vertical"
+                   android:visibility="gone"
+                   tools:visibility="visible"
+
+                   >
+          <TextView
+              android:id="@+id/TwTipoConsulta"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              tools:text="Tipo de Consulta"
               android:gravity="center_horizontal"
               style="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
               />
+
+
+          <TextView
+              android:id="@+id/Twfechareserva"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              tools:text="Esta cita se registro el día: created_at con la siguiente descripción:"
+              android:gravity="center_horizontal"
+              style="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
+              />
+                   <TextView
+                       android:id="@+id/TwTDeescripcion"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       tools:text="Descripcion"
+                       android:gravity="center_horizontal"
+                       style="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
+                       />
+
+               </LinearLayout>
+
+
+
+
+
 
 
 
