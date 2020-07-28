@@ -41,7 +41,7 @@
             />
 
         <EditText
-
+            android:id="@+id/registername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -65,7 +65,7 @@
             android:layout_marginTop="8dp"
             android:inputType="textEmailAddress"
             android:textColor="@color/colorBlanco"
-            android:id="@+id/email"
+            android:id="@+id/registeremail"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -78,16 +78,44 @@
 
         <EditText
             android:id="@+id/password"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:inputType="textPassword"
+            android:textColor="@color/colorBlanco"
             />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_confirmar_clave"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/colorBlanco"
+
+            />
+
+        <EditText
+            android:id="@+id/password_confirmation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:inputType="textPassword"
+            android:textColor="@color/colorBlanco"
+            />
+
+
+
+
+
+
+
+
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/Register"
+            android:id="@+id/butonregitser"
 
             />
 

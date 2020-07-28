@@ -3,12 +3,15 @@ package com.example.myappoimts.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.myappoimts.*
 import com.example.myappoimts.Util.PreferenceHelper
 import com.example.myappoimts.Util.PreferenceHelper.set
 import com.example.myappoimts.Util.PreferenceHelper.get
 import com.example.myappoimts.Util.toast
 import com.example.myappoimts.io.ApiService
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_appoiments.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,6 +30,11 @@ class AppoimentsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_appoiments)
+        val storeToken=  intent.getBooleanExtra("store_token",false)
+        toast("$storeToken")
+        if(!storeToken) {
+            storetoken()
+        }
         Createappoiments.setOnClickListener {
 
             val crearcitas=Intent(this,
@@ -49,7 +57,38 @@ class AppoimentsActivity : AppCompatActivity() {
          }
     }
 
+    private fun storetoken(){
 
+       val jwt=preferences["jwt",""]
+        val autoHeader="Bearer $jwt"
+
+
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener(this){ instanceIdResult ->
+         val deviceToken=instanceIdResult.token
+           val call= apiService.posttoken(autoHeader,deviceToken)
+            call.enqueue(object:Callback<Void>{
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                     toast(t.localizedMessage)
+                }
+
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                     if(response.isSuccessful) {
+                         Log.d(TAG, "token registrado")
+                     }
+                    else
+                     {
+                         Log.d(TAG,"Hubo un problema al registrar el token")
+                     }
+
+                }
+
+
+            })
+
+        }
+
+
+    }
     private fun perfomlogaut(){
         val jwt= preferences["jwt",""]
        val call= apiService.postlogout("Bearer $jwt ")
@@ -79,4 +118,7 @@ class AppoimentsActivity : AppCompatActivity() {
 
 
         }
+    companion object{
+        private const val TAG="MyFirebaseMessagingService"
+    }
 }

@@ -35,7 +35,7 @@
             style="@style/menubutton"
             android:drawableStart="@drawable/ic_reservas_icono"
 
-            />
+            android:drawableLeft="@drawable/ic_reservas_icono" />
 
           <Button
               android:id="@+id/myappoiments"

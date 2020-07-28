@@ -51,6 +51,12 @@
     <string name="api_Complete_los_datos">Por favor complete los datos</string>
     <string name="Usuario_Contrasena_incorrecto">Usuario o Contraseña Incorrecto</string>
     <string name="Email_password_empty">Por favor ingrese correo y clave!!</string>
+    <string name="cita_regitada">Cita regitrada con éxito!!</string>
+    <string name="app_confirmar_clave">Confirmar Clave</string>
+    <string name="completecampos">Por favor complete todos los campos</string>
+    <string name="confirmeclave">Confirmede la clave</string>
+    <string name="default_notification_channel_id">default_notifiction_channel_id</string>
+    <string name="fcm_message">fcm menssage</string>
 
 
 </resources>

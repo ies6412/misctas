@@ -1,23 +1,20 @@
 package com.example.myappoimts.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.myappoimts.R
 import com.example.myappoimts.Util.PreferenceHelper
-import kotlinx.android.synthetic.main.activity_main.*
 import com.example.myappoimts.Util.PreferenceHelper.get
 import com.example.myappoimts.Util.PreferenceHelper.set
-import com.example.myappoimts.R
 import com.example.myappoimts.Util.toast
 import com.example.myappoimts.io.ApiService
 import com.example.myappoimts.io.response.Loginreponse
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -76,7 +73,13 @@ class MainActivity : AppCompatActivity() {
 
             call.enqueue(object : Callback<Loginreponse> {
                 override fun onFailure(call: Call<Loginreponse>, t: Throwable) {
-                    toast(getString(R.string.Problema_de_login) + t.localizedMessage)
+
+                    if(t.localizedMessage.contains("failed "))
+                    {toast("SERVIDOR FUERA DE LINEA")}
+
+
+
+
                     // finish()
                 }
 
@@ -93,7 +96,7 @@ class MainActivity : AppCompatActivity() {
                         if (loginreponse.success) {
                             createSessionPreference(loginreponse.jwt)
                             toast("Bienvenido ${loginreponse.user.name}")
-                            goToMenuActivity()
+                            goToMenuActivity(true)
                         } else {
                             toast(getString(R.string.Usuario_Contrasena_incorrecto))
                         }
@@ -108,11 +111,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun goToMenuActivity(){
-        val appoiments=Intent(this,
-            AppoimentsActivity::class.java)
+    private fun goToMenuActivity(isUserInput:Boolean=false ){
+        val appoiments=Intent(this,AppoimentsActivity::class.java)
+
+        if(isUserInput){
+         intent.putExtra("store_token",true)
+
+        }
         startActivity(appoiments)
-       // finish()
+        finish()
 
     }
    private fun createSessionPreference(jwt:String){
@@ -131,6 +138,9 @@ class MainActivity : AppCompatActivity() {
         else
             snackbar.show()
 
+    }
+    companion object{
+        private const val TAG="AppoimentsActivity"
     }
 }
 

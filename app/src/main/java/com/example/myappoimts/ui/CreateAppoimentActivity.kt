@@ -13,10 +13,13 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myappoimts.R
+import com.example.myappoimts.Util.PreferenceHelper
+import com.example.myappoimts.Util.PreferenceHelper.get
+import com.example.myappoimts.Util.toast
 import com.example.myappoimts.io.ApiService
+import com.example.myappoimts.io.response.SimpleResponse
 import com.example.myappoimts.model.Doctor
 import com.example.myappoimts.model.EspecialidadMedica
-import com.example.myappoimts.model.Hourinterval
 import com.example.myappoimts.model.Shedule
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_create_appoiment.*
@@ -28,11 +31,15 @@ import retrofit2.Response
 import java.util.*
 import kotlin.collections.ArrayList
 
+
 class CreateAppoimentActivity : AppCompatActivity() {
     private val selectedcalendar= Calendar.getInstance()
     private var selectedTimeRadioButton: RadioButton?=null
     private val apiService:ApiService by lazy {
         ApiService.create()
+    }
+    private val preferences  by lazy {
+       PreferenceHelper.defaultPrefs(this)
     }
 
 
@@ -72,8 +79,11 @@ class CreateAppoimentActivity : AppCompatActivity() {
          }
 
         btn_confirmar.setOnClickListener {
-            Toast.makeText(this,"cita registrada",Toast.LENGTH_SHORT).show()
-            finish()
+
+           perfomrStoreAppoiment()
+
+
+
         }
 
 
@@ -89,7 +99,28 @@ class CreateAppoimentActivity : AppCompatActivity() {
     }
 
 
- @SuppressLint("StringFormatMatches")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @SuppressLint("StringFormatMatches")
  @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
  fun onclickfechacitas(v:View){
 
@@ -361,6 +392,47 @@ class CreateAppoimentActivity : AppCompatActivity() {
             }
         })
      // Toast.makeText(this@CreateAppoimentActivity,doctorid.toString()+"fecha cita "+fechacitas,Toast.LENGTH_SHORT).show()
+    }
+
+
+    private fun perfomrStoreAppoiment(){
+
+        // btn_confirmar.isClickable=false
+        val jwt=preferences["jwt",""]
+        val autoHeader="Bearer $jwt"
+
+       val descripcion=descripcionview.text.toString()
+       val especialidad_id=especialidad.selectedItem as EspecialidadMedica
+        val doctor_id=doctors.selectedItem as Doctor
+         val fechacita=fechacitaview.text.toString()
+        val interval=horaview.text.toString()
+         val tipo_cita=tipocitaview.text.toString()
+
+        val call=apiService.postsavecita(autoHeader,descripcion, especialidad_id.id,
+            doctor_id.id,fechacita,interval,tipo_cita)
+         call.enqueue(object:Callback<SimpleResponse>{
+             override fun onFailure(call: Call<SimpleResponse>, t: Throwable) {
+                  toast(t.localizedMessage)
+             }
+
+             override fun onResponse(call: Call<SimpleResponse>,response: Response<SimpleResponse>) {
+                          if(response.isSuccessful){
+
+
+                              toast(getString(R.string.cita_regitada))
+                              finish()
+
+                          }
+                           else{
+                              toast(response.toString())
+                              btn_confirmar.isClickable=true
+                          }
+
+             }
+         })
+
+
+
     }
 
 }

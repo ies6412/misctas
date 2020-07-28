@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "159763899568",
+    "firebase_url": "https://reserva-de-citas-medicas.firebaseio.com",
+    "project_id": "reserva-de-citas-medicas",
+    "storage_bucket": "reserva-de-citas-medicas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:159763899568:android:e995fe43fcc0bf8eec8775",
+        "android_client_info": {
+          "package_name": "com.example.myappoimts"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "159763899568-5eqarfea6b699pv3isvtm1osihfmhmi5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqa4cMr7f87I5HjW7nprhn4INwxun5mR8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "159763899568-5eqarfea6b699pv3isvtm1osihfmhmi5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
