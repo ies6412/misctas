@@ -30,9 +30,8 @@ class AppoimentsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_appoiments)
-        val storeToken=  intent.getBooleanExtra("store_token",false)
-        toast("$storeToken")
-        if(!storeToken) {
+        val storeToken= intent.getBooleanExtra("store_token",true)
+            if(storeToken) {
             storetoken()
         }
         Createappoiments.setOnClickListener {
@@ -73,11 +72,11 @@ class AppoimentsActivity : AppCompatActivity() {
 
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
                      if(response.isSuccessful) {
-                         Log.d(TAG, "token registrado")
+                         Log.d(TAG, "token registrado1")
                      }
                     else
                      {
-                         Log.d(TAG,"Hubo un problema al registrar el token")
+                         Log.d(TAG,"Hubo un problema al registrar el token1")
                      }
 
                 }
@@ -119,6 +118,6 @@ class AppoimentsActivity : AppCompatActivity() {
 
         }
     companion object{
-        private const val TAG="MyFirebaseMessagingService"
+        private const val TAG="FMservice"
     }
 }

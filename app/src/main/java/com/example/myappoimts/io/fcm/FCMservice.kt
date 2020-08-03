@@ -20,13 +20,22 @@ import com.example.myappoimts.io.ApiService
 import com.example.myappoimts.ui.MainActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+
+
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
+
+
+
+
+
+
 //import com.google.firebase.quickstart.fcm.R
 
-class MyFirebaseMessagingService : FirebaseMessagingService() {
+class FCMservice : FirebaseMessagingService() {
 
     private val apiService: ApiService by lazy {
         ApiService.create()
@@ -38,17 +47,22 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
 
 
-
+    /**
+     * Called when message is received.
+     *
+     * @param remoteMessage Object representing the message received from Firebase Cloud Messaging.
+     */
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-
-        Log.d(TAG, "From: ${remoteMessage.from}")
+           Log.d(TAG, "From: ${remoteMessage.from}")
+           toast("${remoteMessage.data.size}")
 
         // Check if message contains a data payload.
         if (remoteMessage.data.isNotEmpty()) {
             Log.d(TAG, "Message data payload: ${remoteMessage.data}")
             handleNow()
         }
+
 
          /*   if (/* Check if data needs to be processed by long running job */ true) {
                 // For long-running tasks (10 seconds or more) use WorkManager.
@@ -60,8 +74,12 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
 
         // Check if message contains a notification payload.
-        remoteMessage.notification?.let {
+        /*remoteMessage.notification?.let {
             Log.d(TAG, "Message Notification Body: ${it.body}")
+        }*/
+
+        remoteMessage.notification.let {
+            Log.d(TAG, "Message Notification Body: " + remoteMessage.notification?.body)
         }
 
 
@@ -122,6 +140,12 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
 
+    /**
+     * Create and show a simple notification containing the received FCM message.
+     *
+     * @param messageBody FCM message body received.
+     */
+
     private fun sendNotification(messageBody: String) {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -153,6 +177,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     companion object {
 
-        private const val TAG = "MyFirebaseMsgService"
+        private const val TAG = "FMservice"
     }
 }

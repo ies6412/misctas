@@ -2,6 +2,7 @@ package com.example.myappoimts.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myappoimts.R
 import com.example.myappoimts.Util.PreferenceHelper
@@ -11,6 +12,7 @@ import com.example.myappoimts.Util.toast
 import com.example.myappoimts.io.ApiService
 import com.example.myappoimts.io.response.Loginreponse
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -18,6 +20,7 @@ import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {
+
     private val apiservice:ApiService by lazy { ApiService.create() }
 
     private val snackbar by lazy {Snackbar.make(mainleyaut,
@@ -25,10 +28,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+       /* FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener(this){
+            instanceIdResult ->
+            val devicetoken=instanceIdResult.token
+            Log.d(TAG,"$devicetoken")
+           // toast("{$devicetoken}")
+        }*/
                                                //mode private =0
-       /* val preferences =getSharedPreferences("general", Context.MODE_PRIVATE)
-                                //creamos una variable "active:session" y le damos el valor de false
-        val session =preferences.getBoolean("session",false)*/
+
 
         val preferences= PreferenceHelper.defaultPrefs(this)
 
@@ -75,7 +83,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onFailure(call: Call<Loginreponse>, t: Throwable) {
 
                     if(t.localizedMessage.contains("failed "))
-                    {toast("SERVIDOR FUERA DE LINEA")}
+                    {toast("SERVIDOR FUERA DE LINEA ")}
 
 
 
@@ -113,11 +121,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun goToMenuActivity(isUserInput:Boolean=false ){
         val appoiments=Intent(this,AppoimentsActivity::class.java)
-
+         Log.d(TAG, isUserInput.toString())
         if(isUserInput){
-         intent.putExtra("store_token",true)
+            var boleano:Boolean=true
+         intent.putExtra("store_token",boleano)
 
-        }
+
+         }
         startActivity(appoiments)
         finish()
 
@@ -140,7 +150,7 @@ class MainActivity : AppCompatActivity() {
 
     }
     companion object{
-        private const val TAG="AppoimentsActivity"
+        private const val TAG="FMservice"
     }
 }
 

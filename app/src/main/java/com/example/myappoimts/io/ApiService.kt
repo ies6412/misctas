@@ -84,7 +84,8 @@ interface ApiService {
 
 
   companion  object Factory{
-    private const val BASE_URL="http://192.168.1.110:8000/"
+    private const val BASE_URL="http://192.168.1.106:8000/"
+     // private const val BASE_URL="http://10.0.0.2:8000/"
     fun create():ApiService{
       val interceptor=HttpLoggingInterceptor()
         interceptor.level=HttpLoggingInterceptor.Level.BODY
