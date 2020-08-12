@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "159763899568",
-    "firebase_url": "https://reserva-de-citas-medicas.firebaseio.com",
-    "project_id": "reserva-de-citas-medicas",
-    "storage_bucket": "reserva-de-citas-medicas.appspot.com"
+    "project_number": "54472818951",
+    "firebase_url": "https://citamedica-345e5.firebaseio.com",
+    "project_id": "citamedica-345e5",
+    "storage_bucket": "citamedica-345e5.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:159763899568:android:e995fe43fcc0bf8eec8775",
+        "mobilesdk_app_id": "1:54472818951:android:409523a42b46030590c5a2",
         "android_client_info": {
           "package_name": "com.example.myappoimts"
         }
       },
       "oauth_client": [
         {
-          "client_id": "159763899568-5eqarfea6b699pv3isvtm1osihfmhmi5.apps.googleusercontent.com",
+          "client_id": "54472818951-5c5au24n0s02p86tsu4eak1imc55u6hm.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBqa4cMr7f87I5HjW7nprhn4INwxun5mR8"
+          "current_key": "AIzaSyCkDHeqK9QZv1a3f1Qb6jt7fCuKetbn4fk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "159763899568-5eqarfea6b699pv3isvtm1osihfmhmi5.apps.googleusercontent.com",
+              "client_id": "54472818951-5c5au24n0s02p86tsu4eak1imc55u6hm.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

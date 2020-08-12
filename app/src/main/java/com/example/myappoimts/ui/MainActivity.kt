@@ -29,12 +29,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-       /* FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener(this){
+       FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener(this){
             instanceIdResult ->
             val devicetoken=instanceIdResult.token
             Log.d(TAG,"$devicetoken")
-           // toast("{$devicetoken}")
-        }*/
+           toast("{$devicetoken}")
+        }
                                                //mode private =0
 
 

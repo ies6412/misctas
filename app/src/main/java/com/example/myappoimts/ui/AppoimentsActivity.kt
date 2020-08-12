@@ -4,13 +4,16 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.example.myappoimts.*
 import com.example.myappoimts.Util.PreferenceHelper
 import com.example.myappoimts.Util.PreferenceHelper.set
 import com.example.myappoimts.Util.PreferenceHelper.get
 import com.example.myappoimts.Util.toast
 import com.example.myappoimts.io.ApiService
+import com.example.myappoimts.model.User
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_appoiments.*
 import retrofit2.Call
@@ -34,27 +37,80 @@ class AppoimentsActivity : AppCompatActivity() {
             if(storeToken) {
             storetoken()
         }
+
+
+      listener()
+
+
+
+    }
+
+    private fun listener(){
+
+        //crear citas
         Createappoiments.setOnClickListener {
 
-            val crearcitas=Intent(this,
-                CreateAppoimentActivity::class.java)
-            startActivity(crearcitas)
-
+           verificartelefono(it)
         }
+
+        //mis citas
         myappoiments.setOnClickListener {
             val myappoimnets=Intent(this,
                 MyAppoimentActivity::class.java)
             startActivity(myappoimnets)
         }
-         btn_sesionlogout.setOnClickListener {
+        //cerrr sesion
+        btn_sesionlogout.setOnClickListener {
             perfomlogaut()
+            clearSessionPreference()
+        }
+        //dato del usuario
+        btnprofileactivity.setOnClickListener {
+            val editprofile=Intent(this,ProfileActivity::class.java)
+            startActivity(editprofile)
+        }
 
 
-               clearSessionPreference()
 
-
-         }
     }
+
+    private fun verificartelefono(view: View){
+
+        val jwt=preferences["jwt",""]
+        val vertelf= apiService.getUser("Bearer $jwt")
+        vertelf.enqueue(object:Callback<User>{
+            override fun onFailure(call: Call<User>, t: Throwable) {
+                toast(t.localizedMessage)
+            }
+
+            override fun onResponse(call: Call<User>, response: Response<User>) {
+               if(response.isSuccessful)
+               {
+                  val tel=response.body()
+                   if (tel != null) {
+                       if(tel.phone.length>=6)
+                       {
+                        iniciarcrearcitas()
+                       }
+                       else
+                       {
+                           Snackbar.make(view,"Por favor registre un teléfono para contiuar... Gracias!!!",Snackbar.LENGTH_LONG).show()
+                       }
+                   }
+               }
+            }
+        })
+
+
+
+
+    }
+
+     private fun iniciarcrearcitas(){
+         val crearcitas=Intent(this,
+             CreateAppoimentActivity::class.java)
+         startActivity(crearcitas)
+     }
 
     private fun storetoken(){
 
@@ -72,7 +128,7 @@ class AppoimentsActivity : AppCompatActivity() {
 
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
                      if(response.isSuccessful) {
-                         Log.d(TAG, "token registrado1")
+                         Log.d(TAG, "token registrado")
                      }
                     else
                      {
@@ -91,6 +147,7 @@ class AppoimentsActivity : AppCompatActivity() {
     private fun perfomlogaut(){
         val jwt= preferences["jwt",""]
        val call= apiService.postlogout("Bearer $jwt ")
+
         call.enqueue(object:Callback<Void>{
             override fun onFailure(call: Call<Void>, t: Throwable) {
               toast(t.localizedMessage)

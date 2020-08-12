@@ -2,10 +2,7 @@ package com.example.myappoimts.io
 
 import com.example.myappoimts.io.response.Loginreponse
 import com.example.myappoimts.io.response.SimpleResponse
-import com.example.myappoimts.model.Appoment
-import com.example.myappoimts.model.Doctor
-import com.example.myappoimts.model.EspecialidadMedica
-import com.example.myappoimts.model.Shedule
+import com.example.myappoimts.model.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -77,15 +74,27 @@ interface ApiService {
         @Query("device_token") token :String
     ):Call<Void>
 
+    //para mostrar los datos del usuario
+    @GET("api/user")
+    @Headers("Accept:application/json")
+    fun getUser(
+        @Header("Authorization")autoHeader:String):Call<User>
 
-
-
+    //para guardar los datos del usuario
+    @POST("api/user")
+    @Headers("Accept:application/json")
+    fun PostUser(
+        @Header("Authorization")autoHeader:String,
+        @Query("nombre")nombre :String,
+        @Query("direccion")direccion:String,
+        @Query("phone")phone:String):Call<Void>
 
 
 
   companion  object Factory{
-    private const val BASE_URL="http://192.168.1.106:8000/"
-     // private const val BASE_URL="http://10.0.0.2:8000/"
+    //private const val BASE_URL="http://10.10.10.161:8000/"
+   private const val BASE_URL="http://192.168.1.106:8000/"
+   //private const val BASE_URL="http://10.0.2.2:8000/"
     fun create():ApiService{
       val interceptor=HttpLoggingInterceptor()
         interceptor.level=HttpLoggingInterceptor.Level.BODY

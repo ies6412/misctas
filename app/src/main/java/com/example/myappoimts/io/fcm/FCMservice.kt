@@ -3,6 +3,8 @@ package com.example.myappoimts.io.fcm
 
 //import androidx.work.OneTimeWorkRequest
 //import androidx.work.WorkManager
+
+
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -20,22 +22,15 @@ import com.example.myappoimts.io.ApiService
 import com.example.myappoimts.ui.MainActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-
-
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-
-
-
-
-
-
 //import com.google.firebase.quickstart.fcm.R
 
 class FCMservice : FirebaseMessagingService() {
+
 
     private val apiService: ApiService by lazy {
         ApiService.create()
@@ -52,8 +47,7 @@ class FCMservice : FirebaseMessagingService() {
      *
      * @param remoteMessage Object representing the message received from Firebase Cloud Messaging.
      */
-
-    override fun onMessageReceived(remoteMessage: RemoteMessage) {
+      override fun onMessageReceived(remoteMessage: RemoteMessage) {
            Log.d(TAG, "From: ${remoteMessage.from}")
 
 
@@ -79,7 +73,15 @@ class FCMservice : FirebaseMessagingService() {
         }*/
 
         remoteMessage.notification.let {
-            Log.d(TAG, "Message Notification Body: " + remoteMessage.notification?.body)
+
+            val bodys=remoteMessage.notification?.body
+            val title=remoteMessage.notification?.title?:getString(R.string.app_name)
+            Log.d(TAG, "Notification Body: " + bodys)
+            Log.d(TAG, " Notification title: " + title )
+            toast("$bodys")
+
+            if(bodys!=null)
+            sendNotification(bodys,title)
         }
 
 
@@ -146,17 +148,18 @@ class FCMservice : FirebaseMessagingService() {
      * @param messageBody FCM message body received.
      */
 
-    private fun sendNotification(messageBody: String) {
+    private fun sendNotification(messageBody: String, messageTitle: String) {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
             PendingIntent.FLAG_ONE_SHOT)
 
-        val channelId = getString(R.string.default_notification_channel_id)
+        //val channelId =  getString(R.string.default_notification_channel_id)
+       val channelId = getString(R.string.default_notification_channel_id)
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.drawable.ic_schedule)
-            .setContentTitle(getString(R.string.fcm_message))
+            .setContentTitle(messageTitle)
             .setContentText(messageBody)
             .setAutoCancel(true)
             .setSound(defaultSoundUri)

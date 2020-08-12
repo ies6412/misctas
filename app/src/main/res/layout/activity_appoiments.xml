@@ -24,11 +24,22 @@
 
 />
 
+    <Button
+        android:id="@+id/btnprofileactivity"
 
-        <Button
+        android:layout_width="match_parent"
+        android:text="@string/editar_perfil"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        style="@style/menubutton"
+        android:drawableStart="@drawable/ic_profile"
+        android:drawableLeft="@drawable/ic_profile" />
+
+
+
+    <Button
             android:id="@+id/Createappoiments"
             android:layout_width="match_parent"
-
            android:text="@string/app_reservar_cita"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
@@ -47,13 +58,12 @@
               android:drawableStart="@drawable/ic_citas"
 
 
-        />
+              android:drawableLeft="@drawable/ic_citas" />
 
 
     <Button
         android:layout_width="match_parent"
-android:id="@+id/btn_sesionlogout"
-
+        android:id="@+id/btn_sesionlogout"
         android:text="@string/app_close_session"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="12dp"
@@ -61,7 +71,7 @@ android:id="@+id/btn_sesionlogout"
         android:drawableStart="@drawable/ic_close_sesion"
 
 
-        />
+        android:drawableLeft="@drawable/ic_close_sesion" />
 
 
 

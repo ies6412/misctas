@@ -57,6 +57,15 @@
     <string name="confirmeclave">Confirmede la clave</string>
     <string name="default_notification_channel_id">default_notifiction_channel_id</string>
     <string name="fcm_message">fcm menssage</string>
+    <string name="editar_perfil">Editar perfil</string>
+    <string name="guardar">Guardar</string>
+    <string name="app_nombres_completos">Nombres Completos</string>
+    <string name="app_telefono">Telefóno</string>
+    <string name="app_direccion">Dirección</string>
+    <string name="app_guardar_datos">Guardar Datos</string>
+    <string name="DatosPersonales">Datos Personales Básicos</string>
+    <string name="app_save_file_user">Los datos han sido guardados</string>
+
 
 
 </resources>

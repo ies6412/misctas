@@ -12,7 +12,7 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
         app:contentPadding="12dp"
-    android:visibility="gone"
+        android:visibility="gone"
 
         >
     <ScrollView
